@@ -1,0 +1,39 @@
+{
+  "name": "text-to-format",
+  "version": "0.0.2",
+  "description": "convert any Plain text file to the X format",
+  "preferGlobal": true,
+  "bin": {
+    "textToFormat": "index.js"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "author": "ham ism <ismnoiet@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ismnoiet/textToFormat.git"
+  },
+  "bugs": {
+    "url": "git://github.com/ismnoiet/textToFormat/issues"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "standard": "^5.4.1"
+  },
+  "keywords": [
+    "format",
+    "JSON",
+    "XML",
+    "CSV",
+    "SQL",
+    "convert",
+    "plain text"
+  ],
+  "license": "ISC"
+}
+
+
+
