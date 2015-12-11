@@ -83,7 +83,7 @@ Here are some example of using setters :
 textToFormat --set Separator --value new_separator
 ```
 ```
-textToFormat --set Attributes --value ["attributeName1","attributeName2",etc]
+textToFormat --set Attributes --value attributeName1,attributeName2,etc
 ```
 ```
 textToFormat --set CurrentFormat XML
