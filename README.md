@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+# textToFormat
+A Node.js package to convert a plain text file to a known format (JSON,XML,SQL,CSV)
+
 ## Configuration 
 
 ### Configuration Getters :
@@ -57,4 +59,4 @@ textToFormat --set Attributes --value ["attributeName1","attributeName2",etc]
 ```
 textToFormat --set CurrentFormat XML 
 ```
->>>>>>> a9ea38b4c7dc3511627c85e4da6ce34767fbb166
+
