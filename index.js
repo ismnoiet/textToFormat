@@ -106,7 +106,7 @@ if (typeof (srcParam) === 'string' && fileExists(srcParam)) {
     console.log(' Trying to use unknown format ')
   }
 
-} else {
+} else if (typeof (srcParam) === 'string' && !fileExists(srcParam)) {
   // the src file doesn't exist
   console.log("the src file doesn't exist")
 }
