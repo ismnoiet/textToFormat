@@ -26,7 +26,7 @@ Here are some example of using setters :
 textToFormat --set Separator --value new_separator
 ```
 ```
-textToFormat --set Attributes --value ["attributeName1","attributeName2",etc]
+textToFormat --set Attributes --value attributeName1,attributeName2,etc
 ```
 ```
 textToFormat --set CurrentFormat XML
@@ -40,7 +40,7 @@ we have to :
 
 2) Specify the **format** to convert to (the ``--to`` parameter)
 
-3) Specify the **destination** file to save the converted data to (the ``--dest`` parameter), if the destination file doesn't exist
+3) Specify the **destination** file to save the converted data to (the ``--dest``  parameter), if the destination file doesn't exist
 it will be created otherwise overwritten
 
 
