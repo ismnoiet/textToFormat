@@ -45,6 +45,6 @@ module.exports = Configuration
 // example 
 // var con =  new Configuration()
 // con.on('configuration-has-changed',function(){
-// 	con.updateConfig()
+//  con.updateConfig()
 // })
 // con.setSeparator('test')

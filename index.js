@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-
-var fs = require('fs')
-Configuration = require('./configHandler'),
-minimist = require('minimist'),
-argv = minimist(process.argv.slice(2))
+var Promise = require('bluebird'),
+  fs = Promise.promisifyAll(require('fs')),
+  Configuration = require('./configHandler'),
+  converter = require('./formatConverter'),
+  minimist = require('minimist'),
+  argv = minimist(process.argv.slice(2))
 
 // listen for changes and then fire the apropriate eventListener
 var config = new Configuration()
@@ -12,14 +13,16 @@ config.on('configuration-has-changed', function (attributeName) {
 })
 
 var possibleConfig = ['Separator', 'FormatTable', 'CurrentFormat', 'Attributes'],
+  formatTable = config.getFormatTable(),
   getParam = argv.get,
   setParam = argv.set,
   valueParam = argv.value,
-  srcParam = argv.file,
+  srcParam = argv.src,
   toParam = argv.to,
   destParam = argv.dest
 
 // check for configuration getters
+getParam = toTitleCase(getParam)
 if( (typeof (getParam) === 'string')) {
   if (possibleConfig.indexOf(getParam) !== -1) {
     console.log('the used ' + getParam + ' :')
@@ -30,36 +33,35 @@ if( (typeof (getParam) === 'string')) {
 }
 
 // check for configuration setters 
+setParam = toTitleCase(setParam)
 if (typeof (setParam) === 'string') {
   if ((possibleConfig.indexOf(setParam) !== -1) && typeof (valueParam) === 'string') {
+    // if Attributes, change string to an array of strings 
+    if (setParam === 'Attributes') {
+      valueParam = valueParam.toString().split(',')
+      console.log(valueParam)
+    }
+
     config['set' + setParam](valueParam)
   } else {
     console.log('wrong value of --set, the value must be in one of the following :  \n* Separator\n* FormatTable\n* CurrentFormat\n* Attributes')
   }
 }
 
+// return a promise object that can be used later on 
 function read (filename) {
-  fs.readFile(filename, function (err, data) {
-    var dataLocal,
-      dataArray // an array of arrays containting all the fields
+  var readPromise = fs.readFileAsync(filename)
+  return readPromise
+}
 
-    if (err) throw err
-    dataArray = toArray(data.toString(), CONFIG.SEPARATOR)
-    // console.log(dataArray)
+// Convert plain text to a usable array 
+function getFileContent (data) {
+  var dataArray // an array of arrays containting all the fields
 
-    // console.log(toJSON(dataArray,CONFIG.ATTRIBUTES)); 
-    // write('output.txt',toJSON(dataArray,CONFIG.ATTRIBUTES))
-
-    // console.log(toXML(dataArray,CONFIG.ATTRIBUTES))
-
-    // write('xml.txt',toXML(dataArray,CONFIG.ATTRIBUTES))
-    // toXML(dataArray,CONFIG.ATTRIBUTES)
-
-    // check for xml convertions 
-    write('example/xml.txt', toXML(dataArray, CONFIG.ATTRIBUTES, 'user'))
-    console.log(toXML(dataArray, CONFIG.ATTRIBUTES, 'user'))
-
-  })
+  // set the default separator 
+  config.setSeparator(' ')
+  dataArray = converter.toArray(data.toString(), config.getSeparator())
+  return dataArray
 }
 
 function write (filename, data) {
@@ -69,63 +71,42 @@ function write (filename, data) {
   })
 }
 
-function toArray (data, SEPARATOR) {
-  var dataLocal,dataArray
-
-  dataLocal = data.split('\n')
-  dataArray = dataLocal.map(function (item) {
-    return item.split(SEPARATOR)
-
-  })
-
-  return dataArray
+function toTitleCase (str) {
+  if (typeof (str) === 'string' && str.length > 0) {
+    return str[0].toUpperCase() + str.substr(1, str.length - 1)
+  }
 }
 
-function toJSON (data, attributes) {
-  var JSONFormat
-
-  JSONFormat = data.map(function (row) {
-    var jsObject = {}
-
-    // wil be replaced with .map for underscore or smething else where we can get the
-    // index of the current element 
-    // jsonrow = row.map(function(){
-
-    // })
-
-    // keep it as a js object 
-    for (var i = 0;i < row.length;i++) {
-      jsObject[attributes[i]] = row[i]
-    }
-
-    // convert the js object to a valid json object
-    return JSON.stringify(jsObject)
-  })
-
-  return '[\n' + JSONFormat.join(',\n') + '\n]'
+function fileExists (filePath) {
+  try {
+    return fs.statSync(filePath).isFile()
+  } catch (err) {
+    return false
+  }
 }
 
-function toXML (data, attributes, tagName) {
-  XMLFormat = data.map(function (row) {
-    var newRow
+// here we manage all the fancy stuff 
 
-    newRow = row.map(function (item, index) {
-      // tow spaces here can be used as a parameter 
-      var XMLElement = '  <' + attributes[index] + '>' + item + '</' + attributes[index] + '>\n'
-      return XMLElement
+if (typeof (srcParam) === 'string' && fileExists(srcParam)) {
+  // check that the desired format already exists in our formataTable variable
+  if (formatTable.indexOf(toParam.toUpperCase()) != -1) {
+    // file is ready to be read , TODO verify that ther source file is not empty
+    // this is used when want to use the retrieved from the file 
 
+    console.log('data after convertion : ')
+
+    read(srcParam).then(function (data) {
+      var dataArray = getFileContent(data),
+        dataAfterConversion = converter['to' + toParam.toUpperCase()](dataArray, config.getAttributes())
+      write(destParam, dataAfterConversion)
+      console.log(dataAfterConversion)
     })
 
-    // use the provided tagName or element instead
-    tagName = tagName || 'element'
+  } else {
+    console.log(' Trying to use unknown format ')
+  }
 
-    newRow = newRow.join('')
-    // add the opening and closing tagName wrapper 
-    newRow = '<' + tagName + '>\n' + newRow + '</' + tagName + '>'
-    return newRow
-
-  }).join('\n')
-
-  return XMLFormat
+} else {
+  // the src file doesn't exist
+  console.log("the src file doesn't exist")
 }
-s
