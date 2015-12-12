@@ -46,13 +46,13 @@ it will be created otherwise overwritten
 
 ### Example
 
-** a JSON example :**
+**A JSON example :**
 
 ```
 textToFormat --src source.txt --to json --dest output.json
 ```
 
-** an XML example :**
+**An XML example :**
 
 ```
 textToFormat --src source.txt --to xml --dest output.xml
