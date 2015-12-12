@@ -1,6 +1,9 @@
 # textToFormat
 A Nodejs Package to Convert any Plain text file to the X format(JSON,XML,SQL,CSV)
 
+![alt tag](https://github.com/ismnoiet/textToFormat/blob/master/how.png)
+
+
 ## Configuration
 #### Note :
 **Configuration is Case sensitive so be careful when writing configuration**
