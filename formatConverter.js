@@ -31,7 +31,7 @@ function toJSON (data, attributes) {
     return JSON.stringify(jsObject)
   })
 
-  return '[\n' + JSONFormat.join(',\n') + '\n]'
+  return '[\n  ' + JSONFormat.join(',\n  ') + '\n]'
 }
 
 function toXML (data, attributes, tagName) {

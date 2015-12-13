@@ -32,6 +32,9 @@ Configuration.prototype.getAttributes = function (attributes) {
 Configuration.prototype.getFormatTable = function (attributes) {
   return CONFIG.FORMAT_TABLE
 },
+Configuration.prototype.getDefault = function (attributes) {
+  return CONFIG.DEFAULT
+},
 Configuration.prototype.updateConfig = function (attributeName) {
   var configJSON = JSON.stringify(CONFIG, null, '  ')
   fs.writeFile('./config.json', configJSON, function (err) {

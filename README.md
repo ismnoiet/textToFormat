@@ -18,6 +18,9 @@ textToFormat --get CurrentFormat
 ```
 textToFormat --get FormatTable
 ```
+```
+textToFormat --get Default  // to get an object of the default configuration  
+```
 
 ### Configuration Setters
 Here are some example of using setters :

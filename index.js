@@ -6,13 +6,13 @@ var Promise = require('bluebird'),
   minimist = require('minimist'),
   argv = minimist(process.argv.slice(2))
 
-// listen for changes and then fire the apropriate eventListener
+// listen for a configuration change then fire the apropriate eventListener
 var config = new Configuration()
 config.on('configuration-has-changed', function (attributeName) {
   config.updateConfig(attributeName)
 })
 
-var possibleConfig = ['Separator', 'FormatTable', 'CurrentFormat', 'Attributes'],
+var possibleConfig = ['Separator', 'FormatTable', 'CurrentFormat', 'Attributes','Default'],
   formatTable = config.getFormatTable(),
   getParam = argv.get,
   setParam = argv.set,
@@ -34,6 +34,7 @@ if( (typeof (getParam) === 'string')) {
 
 // check for configuration setters 
 setParam = toTitleCase(setParam)
+
 if (typeof (setParam) === 'string') {
   if ((possibleConfig.indexOf(setParam) !== -1) && typeof (valueParam) === 'string') {
     // if Attributes, change string to an array of strings 
@@ -45,6 +46,7 @@ if (typeof (setParam) === 'string') {
     config['set' + setParam](valueParam)
   } else {
     console.log('wrong value of --set, the value must be in one of the following :  \n* Separator\n* FormatTable\n* CurrentFormat\n* Attributes')
+    console.log('if your don\'t have the previous problem then VERIFY that the value of --value');   
   }
 }
 
@@ -86,7 +88,7 @@ function fileExists (filePath) {
 }
 
 // here we manage all the fancy stuff 
-
+ 
 if (typeof (srcParam) === 'string' && fileExists(srcParam)) {
   // check that the desired format already exists in our formataTable variable
   if (formatTable.indexOf(toParam.toUpperCase()) != -1) {
@@ -110,3 +112,6 @@ if (typeof (srcParam) === 'string' && fileExists(srcParam)) {
   // the src file doesn't exist
   console.log("the src file doesn't exist")
 }
+
+
+
