@@ -6,7 +6,7 @@ A Nodejs Package to Convert any Plain text file to the X format(JSON,XML,SQL,CSV
 
 ## Configuration
 #### Note :
-**Configuration is Case sensitive so be careful when writing configuration**
+**just make sure that all attributes are camel cased **
 
 ### Configuration Getters :
 ```
