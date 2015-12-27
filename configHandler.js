@@ -1,42 +1,42 @@
 var fs = require('fs'),
   util = require('util'),
   EventEmitter = require('events'),
-  CONFIG = require('./config.json')
+  config = require('./config.json')
 
 function Configuration () {
   EventEmitter.call(this)
 }
 util.inherits(Configuration, EventEmitter)
 
-Configuration.prototype.setSeparator = function (newSeparator) {
-  CONFIG.SEPARATOR = newSeparator
+Configuration.prototype.setSeparator = function (separator) {
+  config.separator = separator
   this.emit('configuration-has-changed', 'Separator')
 },
-Configuration.prototype.setCurrentFormat = function (newFormat) {
-  CONFIG.CURRENT_FORMAT = newFormat
+Configuration.prototype.setCurrentFormat = function (format) {
+  config.currentFormat = format.toUpperCase();
   this.emit('configuration-has-changed', 'CurrentFormat')
 },
 Configuration.prototype.setAttributes = function (attributes) {
-  CONFIG.ATTRIBUTES = attributes
+  config.attributes = attributes
   this.emit('configuration-has-changed', 'Attributes')
 },
 Configuration.prototype.getSeparator = function (newSeparator) {
-  return CONFIG.SEPARATOR
+  return config.separator
 },
 Configuration.prototype.getCurrentFormat = function (newFormat) {
-  return CONFIG.CURRENT_FORMAT
+  return config.currentFormat
 },
 Configuration.prototype.getAttributes = function (attributes) {
-  return CONFIG.ATTRIBUTES
+  return config.attributes
 },
 Configuration.prototype.getFormatTable = function (attributes) {
-  return CONFIG.FORMAT_TABLE
+  return config.formatTable
 },
 Configuration.prototype.getDefault = function (attributes) {
-  return CONFIG.DEFAULT
+  return config.default
 },
 Configuration.prototype.updateConfig = function (attributeName) {
-  var configJSON = JSON.stringify(CONFIG, null, '  ')
+  var configJSON = JSON.stringify(config, null, '  ')
   fs.writeFile('./config.json', configJSON, function (err) {
     if (err) throw err
     console.log('"' + attributeName + '" was updated successfully')
