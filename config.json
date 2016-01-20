@@ -13,6 +13,6 @@
     "separator": " ",
     "currentFormat": "JSON",
     "attributes": [],
-    "tagName":"element"
-  }
+  },
+  "tagName":"element"
 }
