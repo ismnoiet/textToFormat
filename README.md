@@ -1,7 +1,7 @@
 # textToFormat
 A Nodejs Package to Convert any Plain text file to the X format(JSON,XML,SQL,CSV)
 
-![alt tag](https://github.com/ismnoiet/textToFormat/blob/master/how.png)
+![alt tag](https://raw.githubusercontent.com/ismnoiet/textToFormat/master/how.png)
 
 ## Installation
 ```
@@ -28,6 +28,9 @@ textToFormat --get formatTable
 ```
 textToFormat --get default  // to get an object of the default configuration  
 ```
+```
+textToFormat --get tagName
+```
 
 ### Configuration Setters
 Here are some example of using setters :
@@ -40,6 +43,9 @@ textToFormat --set attributes --value attributeName1,attributeName2,etc
 ```
 ```
 textToFormat --set currentFormat XML
+```
+```
+textToFormat --set tagName user
 ```
 
 ## Convertion
@@ -70,8 +76,15 @@ textToFormat --src source.txt --to json --dest output.json
 ```
 
 **An XML example :**
+
 ```
 textToFormat --set attributes --value username,email,password
+```
+
+**Important:** *for XML we can set the tagName of the wrapper element, otherwirse the default tagName wrapper is used( by default it is 'element')*
+
+```
+textToFormat --set tagName --value user
 ```
 
 ```

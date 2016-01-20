@@ -12,8 +12,9 @@ config.on('configuration-has-changed', function (attributeName) {
   config.updateConfig(attributeName)
 })
 
-var possibleConfig = ['Separator', 'FormatTable', 'CurrentFormat', 'Attributes','Default'],
+var possibleConfig = ['Separator', 'FormatTable', 'CurrentFormat', 'Attributes','Default','TagName'],
   formatTable = config.getFormatTable(),
+  tagName = config.getTagName(),
   getParam = argv.get,
   setParam = argv.set,
   valueParam = argv.value,
@@ -28,7 +29,7 @@ if( (typeof (getParam) === 'string')) {
     console.log('the used ' + getParam + ' :')
     console.log(config['get' + getParam]())
   } else {
-    console.log('wrong value of --get, the value must be in one of the following :  \n* Separator\n* FormatTable\n* CurrentFormat\n* Attributes')
+    console.log('wrong value of --get, the value must be in one of the following :  \n*' + possibleConfig.join("\n*"))
   }
 }
 
@@ -99,7 +100,7 @@ if (typeof (srcParam) === 'string' && fileExists(srcParam)) {
 
     read(srcParam).then(function (data) {
       var dataArray = getFileContent(data),
-        dataAfterConversion = converter['to' + toParam.toUpperCase()](dataArray, config.getAttributes())
+        dataAfterConversion = converter['to' + toParam.toUpperCase()](dataArray, config.getAttributes(),tagName)
       write(destParam, dataAfterConversion)
       console.log(dataAfterConversion)
     })

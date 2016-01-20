@@ -1,9 +1,7 @@
 {
-  "separator": "abc",
+  "separator": " ",
   "currentFormat": "XML",
-  "attributes": [
-    ""
-  ],
+  "attributes": [],
   "formatTable": [
     "JSON",
     "XML",
@@ -12,7 +10,7 @@
   "default": {
     "separator": " ",
     "currentFormat": "JSON",
-    "attributes": [],
+    "attributes": []
   },
-  "tagName":"element"
+  "tagName": "element"
 }
