@@ -1,6 +1,6 @@
 {
   "name": "text-to-format",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "convert any Plain text file to the X format",
   "preferGlobal": true,
   "bin": {
