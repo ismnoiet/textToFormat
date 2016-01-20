@@ -1,10 +1,8 @@
 {
-  "separator": " ",
+  "separator": "abc",
   "currentFormat": "XML",
   "attributes": [
-    "nom",
-    "prenom",
-    "age"
+    ""
   ],
   "formatTable": [
     "JSON",
@@ -14,8 +12,7 @@
   "default": {
     "separator": " ",
     "currentFormat": "JSON",
-    "attributes": [
-      ""
-    ]
+    "attributes": [],
+    "tagName":"element"
   }
 }
