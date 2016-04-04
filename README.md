@@ -1,5 +1,5 @@
 # textToFormat
-A Nodejs Package to Convert any Plain text file to the X format(JSON,XML,SQL,CSV)
+A Node.js Package to Convert any Plain text file to the X format(JSON,XML,SQL,CSV).
 
 ![alt tag](https://raw.githubusercontent.com/ismnoiet/textToFormat/master/how.png)
 
@@ -7,8 +7,8 @@ A Nodejs Package to Convert any Plain text file to the X format(JSON,XML,SQL,CSV
 ```
 npm install -g text-to-format
 ```
-**Note : ** In some computers you need to be an administrator,
-in this case use sudo before the previous command
+**Note :** In some computers you need to be an administrator,
+in this case add ``sudo`` before the previous command.
 
 ## Configuration
 
