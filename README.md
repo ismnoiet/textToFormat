@@ -1,3 +1,4 @@
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 # textToFormat
 A Node.js Package to Convert any Plain text file to the X format(JSON,XML,SQL,CSV).
 
