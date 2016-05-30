@@ -9,7 +9,7 @@ function toArray (data, SEPARATOR) {
     return [dataLocal];
   }
   
-  return dataArray = dataLocal.map(function (item) {
+  return dataLocal.map(function (item) {
     return item.split(SEPARATOR)
 
   })
