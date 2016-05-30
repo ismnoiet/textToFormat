@@ -2,12 +2,17 @@ function toArray (data, SEPARATOR) {
   var dataLocal,dataArray
 
   dataLocal = data.split('\n')
-  dataArray = dataLocal.map(function (item) {
+  if(!data){
+    return [];
+  }
+  if(!SEPARATOR){
+    return [dataLocal];
+  }
+  
+  return dataArray = dataLocal.map(function (item) {
     return item.split(SEPARATOR)
 
   })
-
-  return dataArray
 }
 
 function toJSON (data, attributes) {
@@ -35,8 +40,8 @@ function toJSON (data, attributes) {
 }
 
 function toXML (data, attributes, tagName) {
-  XMLFormat = data.map(function (row) {
-    var newRow
+    XMLFormat = data.map(function (row) {
+    var newRow;
 
     newRow = row.map(function (item, index) {
       // tow spaces here can be used as a parameter 
