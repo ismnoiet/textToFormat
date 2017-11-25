@@ -1,6 +1,6 @@
 {
   "name": "text-to-format",
-  "version": "0.0.13",
+  "version": "0.0.2",
   "description": "convert any Plain text file to the X format",
   "preferGlobal": true,
   "bin": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "standard"
   },
-  "author": "ham ism <ismnoiet@gmail.com>",
+  "author": "ismnoiet <ismnoiet@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git://github.com/ismnoiet/textToFormat.git"

@@ -33,12 +33,12 @@ if( (typeof (getParam) === 'string')) {
   }
 }
 
-// check for configuration setters 
+// check for configuration setters
 setParam = toTitleCase(setParam)
 
 if (typeof (setParam) === 'string') {
   if ((possibleConfig.indexOf(setParam) !== -1) && typeof (valueParam) === 'string') {
-    // if Attributes, change string to an array of strings 
+    // if Attributes, change string to an array of strings
     if (setParam === 'Attributes') {
       valueParam = valueParam.toString().split(',')
       console.log(valueParam)
@@ -47,21 +47,21 @@ if (typeof (setParam) === 'string') {
     config['set' + setParam](valueParam)
   } else {
     console.log('wrong value of --set, the value must be in one of the following :  \n* Separator\n* FormatTable\n* CurrentFormat\n* Attributes')
-    console.log('if your don\'t have the previous problem then VERIFY that the value of --value');   
+    console.log('if your don\'t have the previous problem then VERIFY that the value of --value');
   }
 }
 
-// return a promise object that can be used later on 
+// return a promise object that can be used later on
 function read (filename) {
   var readPromise = fs.readFileAsync(filename)
   return readPromise
 }
 
-// Convert plain text to a usable array 
+// Convert plain text to a usable array
 function getFileContent (data) {
   var dataArray // an array of arrays containting all the fields
 
-  // set the default separator 
+  // set the default separator
   config.setSeparator(' ')
   dataArray = converter.toArray(data.toString(), config.getSeparator())
   return dataArray
@@ -88,13 +88,13 @@ function fileExists (filePath) {
   }
 }
 
-// here we manage all the fancy stuff 
- 
+// here we manage all the fancy stuff
+
 if (typeof (srcParam) === 'string' && fileExists(srcParam)) {
   // check that the desired format already exists in our formataTable variable
   if (formatTable.indexOf(toParam.toUpperCase()) != -1) {
     // file is ready to be read , TODO verify that ther source file is not empty
-    // this is used when want to use the retrieved from the file 
+    // this is used when want to use the retrieved from the file
 
     console.log('data after convertion : ')
 
