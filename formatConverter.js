@@ -1,8 +1,9 @@
 function toArray (data, SEPARATOR) {
   var dataLocal,dataArray
 
-  dataLocal = data.split('\n')
+  dataLocal = data.trim().split('\n')
   dataArray = dataLocal.map(function (item) {
+    item = item.trim()
     return item.split(SEPARATOR)
 
   })
@@ -17,12 +18,12 @@ function toJSON (data, attributes) {
     var jsObject = {}
 
     // wil be replaced with .map for underscore or smething else where we can get the
-    // index of the current element 
+    // index of the current element
     // jsonrow = row.map(function(){
 
     // })
 
-    // keep it as a js object 
+    // keep it as a js object
     for (var i = 0;i < row.length;i++) {
       jsObject[attributes[i]] = row[i]
     }
@@ -39,7 +40,7 @@ function toXML (data, attributes, tagName) {
     var newRow
 
     newRow = row.map(function (item, index) {
-      // tow spaces here can be used as a parameter 
+      // tow spaces here can be used as a parameter
       var XMLElement = '  <' + attributes[index] + '>' + item + '</' + attributes[index] + '>\n'
       return XMLElement
 
@@ -49,7 +50,7 @@ function toXML (data, attributes, tagName) {
     tagName = tagName || 'element'
 
     newRow = newRow.join('')
-    // add the opening and closing tagName wrapper 
+    // add the opening and closing tagName wrapper
     newRow = '<' + tagName + '>\n' + newRow + '</' + tagName + '>'
     return newRow
 

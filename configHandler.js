@@ -46,13 +46,13 @@ Configuration.prototype.updateConfig = function (attributeName) {
   var configJSON = JSON.stringify(config, null, '  ')
   fs.writeFile('./config.json', configJSON, function (err) {
     if (err) throw err
-    console.log('"' + attributeName + '" was updated successfully')
+    console.log('"' + attributeName + '" updated successfully')
   })
 }
 
 module.exports = Configuration
 
-// example 
+// example
 // var con =  new Configuration()
 // con.on('configuration-has-changed',function(){
 //  con.updateConfig()
